@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>매일 할 일</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <h1>매일 할 일</h1>
+      <p class="subtitle">오늘도 한 걸음</p>
+    </header>
+
+    <section class="view-controls">
+      <div class="view-tabs" role="tablist">
+        <button type="button" class="view-tab active" data-view="daily" role="tab" aria-selected="true">일별</button>
+        <button type="button" class="view-tab" data-view="weekly" role="tab" aria-selected="false">주별</button>
+        <button type="button" class="view-tab" data-view="monthly" role="tab" aria-selected="false">월별</button>
+      </div>
+      <div class="nav-row">
+        <button type="button" class="nav-btn" id="prevPeriod" aria-label="이전">‹</button>
+        <span class="period-label" id="periodLabel"></span>
+        <button type="button" class="nav-btn" id="nextPeriod" aria-label="다음">›</button>
+        <button type="button" class="nav-btn today-btn" id="goToday">오늘</button>
+      </div>
+    </section>
+
+    <section id="calendarSection" class="calendar-section hidden" aria-label="달력">
+      <div id="calendarRoot" class="calendar-root"></div>
+      <button type="button" id="clearDayFilter" class="clear-day-filter hidden">
+        기간 전체 보기
+      </button>
+    </section>
+
+    <section class="add-section">
+      <form id="addForm" class="add-form">
+        <input
+          type="date"
+          id="todoDate"
+          class="date-input"
+          required
+          aria-label="할 일 날짜"
+        >
+        <input
+          type="text"
+          id="todoText"
+          class="text-input"
+          placeholder="할 일을 입력하세요"
+          maxlength="200"
+          required
+          aria-label="할 일 내용"
+        >
+        <button type="submit" class="btn btn-primary">할 일 추가</button>
+      </form>
+    </section>
+
+    <section class="list-section">
+      <ul id="todoList" class="todo-list" aria-live="polite"></ul>
+      <p id="emptyState" class="empty-state hidden">이 기간에 등록된 할 일이 없습니다.</p>
+    </section>
+  </div>
+
+  <dialog id="editDialog" class="edit-dialog">
+    <form method="dialog" id="editForm" class="edit-form">
+      <h2>할 일 수정</h2>
+      <label for="editDate">날짜</label>
+      <input type="date" id="editDate" required>
+      <label for="editText">내용</label>
+      <input type="text" id="editText" maxlength="200" required>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary" id="editCancel">취소</button>
+        <button type="submit" class="btn btn-primary">저장</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
